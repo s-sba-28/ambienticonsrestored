@@ -1,12 +1,12 @@
 {
-	"geode": "4.6.3",
+	"geode": "6.0.0-beta.1",
 	"gd": {
-		"win": "2.2074",
-		"android": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
+		"win": "2.2091",
+		"android": "2.2091",
+		"mac": "2.2091",
+		"ios": "2.2091"
 	},
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"id": "terma.ambienticons",
 	"name": "Ambient Icons",
 	"developer": "Terma",

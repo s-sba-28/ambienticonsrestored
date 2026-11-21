@@ -30,6 +30,8 @@ void AmbientColor::onChange(float dt) {
 ColorWrapper AmbientColor::getRenderColor(GJBaseGameLayer* layer, CCSprite* bgSprite, Settings::ColorPicker picker) {
 	if (!m_renderTexture) {
 		m_renderTexture = CCRenderTexture::create(1, 1);
+		if (!m_renderTexture)
+			return ColorWrapper(0, 0, 0);
 	}
 
 	m_renderTexture->begin(); // Rendering block
@@ -42,7 +44,15 @@ ColorWrapper AmbientColor::getRenderColor(GJBaseGameLayer* layer, CCSprite* bgSp
 	m_renderTexture->end(); // Rendering block
 
 	auto img = m_renderTexture->newCCImage();
+	if (!img)
+		return ColorWrapper(0, 0, 0);
+
 	auto data = img->getData();
+	if (!data) {
+		delete img;
+		return ColorWrapper(0, 0, 0);
+	}
+
 	ColorWrapper color = ColorWrapper(data[0], data[1], data[2]);
 
 	delete img;
@@ -52,6 +62,9 @@ ColorWrapper AmbientColor::getRenderColor(GJBaseGameLayer* layer, CCSprite* bgSp
 
 CCSprite* AmbientColor::getPickSprite(GJBaseGameLayer* layer) {
 	auto parent = layer->getChildByIDRecursive("main-node");
+	if (!parent)
+		return nullptr;
+
 	CCSprite* bgSprite = nullptr;
 
 	if (parent->getChildByID("background"))
@@ -107,6 +120,8 @@ ColorWrapper AmbientColor::getScreenColor(GJBaseGameLayer* layer) {
 
 void AmbientColor::setIconColor(ColorWrapper color, PlayerObject* player, bool isP2) {
 	// TODO: Fix bad colors after dashing without having both colors enabled
+	if (!player)
+		return;
 
 	switch (isP2 ? Settings::p2Color : Settings::p1Color) {
 		case Settings::COLOR_BOTH:
@@ -127,7 +142,7 @@ void AmbientColor::setIconColor(ColorWrapper color, PlayerObject* player, bool i
 			player->updateGlowColor();
 			break;
 		case Settings::EXTRA_WAVE_TRAIL:
-			if (player->m_isDart)
+			if (player->m_isDart && player->m_waveTrail)
 				player->m_waveTrail->setColor(color);
 			break;
 		case Settings::EXTRA_NONE:

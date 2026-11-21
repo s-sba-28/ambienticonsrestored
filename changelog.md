@@ -1,5 +1,10 @@
 # Ambient Icons Changelog
 
+## v2.1.2 - Compatibility update
+- <cy>Updated</c> Geode requirement to 6.0.0-beta.1
+- <cy>Updated</c> Geometry Dash requirement to 2.2091
+- <cy>Fixed</c> crashes when expected game nodes or player effects are unavailable
+
 ## v2.1.0-2.1.1 - The comeback update
 - <cy>Ported</c> to iOS
 - <cy>Added</c> invert colors feature
