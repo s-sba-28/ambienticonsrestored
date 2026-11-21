@@ -26,6 +26,7 @@ protected:
 private:
 	WeakRef<GJBaseGameLayer> m_layer;
 	Ref<CCRenderTexture> m_renderTexture;
+	CCSprite* m_renderPositionSprite = nullptr;
 
 	CCPoint m_pickPos;
 

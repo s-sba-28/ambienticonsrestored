@@ -1,5 +1,9 @@
 # Ambient Icons Changelog
 
+## v2.1.3 - Standalone update
+- <cy>Removed</c> the Node IDs dependency
+- <cy>Updated</c> background picking to use the native game-layer background
+
 ## v2.1.2 - Compatibility update
 - <cy>Updated</c> Geode requirement to 6.0.0-beta.1
 - <cy>Updated</c> Geometry Dash requirement to 2.2091

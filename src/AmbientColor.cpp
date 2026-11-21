@@ -61,18 +61,7 @@ ColorWrapper AmbientColor::getRenderColor(GJBaseGameLayer* layer, CCSprite* bgSp
 }
 
 CCSprite* AmbientColor::getPickSprite(GJBaseGameLayer* layer) {
-	auto parent = layer->getChildByIDRecursive("main-node");
-	if (!parent)
-		return nullptr;
-
-	CCSprite* bgSprite = nullptr;
-
-	if (parent->getChildByID("background"))
-		bgSprite = static_cast<CCSprite *>(parent->getChildByID("background"));
-	else {
-		bgSprite = parent->getChildByType<CCSprite>(0);
-	}
-	return bgSprite;
+	return layer->m_background;
 }
 
 ColorWrapper AmbientColor::getScreenColor(GJBaseGameLayer* layer) {
@@ -88,14 +77,17 @@ ColorWrapper AmbientColor::getScreenColor(GJBaseGameLayer* layer) {
 	layer->setPositionY(-size.height * m_pickPos.y);
 
 	if (Settings::drawRenderPosition) {
-		if (auto spr = layer->getChildByIDRecursive("render-pos-circle"_spr))
-			spr->removeMeAndCleanup();
-
-		auto circleSpr = CCSprite::create("circle.png");
-		circleSpr->setPosition({static_cast<float>(size.width * m_pickPos.x), static_cast<float>(size.height * m_pickPos.y)});
-		circleSpr->setID("render-pos-circle"_spr);
-
-		layer->addChild(circleSpr);
+		if (!m_renderPositionSprite) {
+			m_renderPositionSprite = CCSprite::create("circle.png");
+			if (m_renderPositionSprite)
+				layer->addChild(m_renderPositionSprite);
+		}
+		if (m_renderPositionSprite) {
+			m_renderPositionSprite->setPosition({static_cast<float>(size.width * m_pickPos.x), static_cast<float>(size.height * m_pickPos.y)});
+		}
+	} else if (m_renderPositionSprite) {
+		m_renderPositionSprite->removeFromParentAndCleanup(true);
+		m_renderPositionSprite = nullptr;
 	}
 
 

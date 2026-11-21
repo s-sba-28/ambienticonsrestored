@@ -6,7 +6,7 @@
 		"mac": "2.2091",
 		"ios": "2.2091"
 	},
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"id": "terma.ambienticons",
 	"name": "Ambient Icons",
 	"developer": "Terma",
@@ -135,9 +135,6 @@
 			"importance": "conflicting",
 			"version": ">=1.2.0"
 		}
- 	},
-	"dependencies": {
-  		"geode.node-ids": ">=1.8.0"
  	},
 	"links": {
 		"source": "https://github.com/Termantita/AmbientIcons"
