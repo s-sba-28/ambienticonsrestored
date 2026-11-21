@@ -40,3 +40,4 @@ TODO: Add images
 - [ ] Smooth change between picks
 - [ ] Some kind of environmental glow maybe
 - [X] Rewrite ~~follow player picker~~ the whole mod
+# ambienticonsrestored
